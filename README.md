@@ -73,10 +73,9 @@ What have we got?
 ```
 ls /usr/share/datastax-agent/dse-node1
 datastax-agent-6.0.1
-```
 cd /usr/share/datastax-agent/dse-node1/datastax-agent-6.0.1
 ```
-Edit the address.yaml to set the OpsCenter parametersthe - the stomp interface points to the node with OpsCenter:
+Edit the address.yaml to set the OpsCenter parameters - the stomp interface points to the node with OpsCenter:
 ```
 vi ./conf/address.yaml
 
@@ -107,7 +106,7 @@ After a few seconds you should see your agent on the cluster you defined earlier
 ```
   
   
-###Tarball agent install - dse-node2
+##Tarball agent install - dse-node2
 
 Create a directory for the agent
 ```
