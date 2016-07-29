@@ -2,11 +2,11 @@
 
 The new Multi-Instance feature released with DSE 5.0 allows for the simple deployment of multiple DSE instances on a single machine.
 
-For the first part in this series on Multi-Instance look *here*.
+For the first part in this series on Multi-Instance look [here](https://github.com/simonambridge/DataStax-5.0-Multi-Instance-Demo).
 
-DataStax Multi-Instance documentation can be found here: https://docs.datastax.com/en/latest-dse/datastax_enterprise/multiInstance/configMultiInstance.html
+DataStax Multi-Instance documentation can be found [here](https://docs.datastax.com/en/latest-dse/datastax_enterprise/multiInstance/configMultiInstance.html)
 
-##Install DataSTax OpsCenter
+##Install DataStax OpsCenter
 
 ```
 deb http://datastaxrepo_gmail.com:utJVKEg4lKeaWTX@debian.datastax.com/enterprise stable main
