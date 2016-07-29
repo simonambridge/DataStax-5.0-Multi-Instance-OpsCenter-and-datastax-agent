@@ -63,16 +63,18 @@ You can set up nodes at 127.0.0.2/7299 and 127.0.0.3/7399 but we havent installe
 
 ##Tarball agent install - dse-node1
 
-```sudo mkdir -p /usr/share/datastax-agent/dse-node1
+```
+sudo mkdir -p /usr/share/datastax-agent/dse-node1
 cd /usr/share/datastax-agent/dse-node1
 
 curl --user simon.ambridge@datastax.com:Yzf600rr1 -L http://downloads.datastax.com/enterprise/datastax-agent-6.0.tar.gz | tar xz
 ```
+What have we got?
 ```
 ls /usr/share/datastax-agent/dse-node1
-datastax-agent-6.0.0
+datastax-agent-6.0.1
 ```
-cd /usr/share/datastax-agent/dse-node1/datastax-agent-6.0.0
+cd /usr/share/datastax-agent/dse-node1/datastax-agent-6.0.1
 ```
 Edit the address.yaml to set the OpsCenter parametersthe - the stomp interface points to the node with OpsCenter:
 ```
