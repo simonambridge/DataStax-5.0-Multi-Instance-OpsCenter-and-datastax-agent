@@ -71,7 +71,7 @@ datastax-agent-6.0.0
 ```
 cd /usr/share/datastax-agent/dse-node1/datastax-agent-6.0.0
 ```
-Edit the address.yaml to set the OpsCenter parameters:
+Edit the address.yaml to set the OpsCenter parametersthe - the stomp interface points to the node with OpsCenter:
 ```
 vi ./conf/address.yaml
 
@@ -103,21 +103,23 @@ After a few seconds you should see your agent on the cluster you defined earlier
   
   
 ###Tarball agent install - dse-node2
+
+Create a directory for the agent
 ```
 sudo mkdir -p /usr/share/datastax-agent/dse-node2
 cd /usr/share/datastax-agent/dse-node2
 ```
-
+Download and unpack the Agent Install File
 ```
 curl --user simon.ambridge@datastax.com:Yzf600rr1 -L http://downloads.datastax.com/enterprise/datastax-agent-6.0.tar.gz | tar xz
 
 ls /usr/share/datastax-agent/dse-node2
-datastax-agent-6.0.0
+datastax-agent-6.0.1
 
 cd /usr/share/datastax-agent/dse-node2/datastax-agent-6.0.1
 ```
 
-Edit the address.yaml file for node2:
+Edit the address.yaml file for node2 - the stomp interface points to the node with OpsCenter:
 ```
 vi ./conf/address.yaml
 
@@ -147,11 +149,10 @@ Now, while we're here....
 
 ##Quick Look At The Cassandra 3.x Storage Engine
 
-###Create the schema on my two node cluster using something based on [Andy Tolbert's](http://www.datastax.com/dev/blog/debugging-sstables-in-3-0-with-sstabledump) example:
-``` 
-CREATE KEYSPACE IF NOT EXISTS ticker WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
-```
+###Create The Schema On My Two Node Cluster 
+I'm using something based on [Andy Tolbert's](http://www.datastax.com/dev/blog/debugging-sstables-in-3-0-with-sstabledump) example.
 
+Create the keyspace:
 ```
 # cqlsh dse-node1
 Connected to Cassandra at dse-node1:9042.
@@ -161,7 +162,9 @@ cqlsh> CREATE KEYSPACE IF NOT EXISTS ticker WITH REPLICATION = { 'class' : 'Simp
 cqlsh>
 
 USE ticker;
- 
+```
+Create the table:
+```
 CREATE TABLE IF NOT EXISTS symbol_history ( 
   symbol    text,
   year      int,
@@ -177,7 +180,7 @@ CREATE TABLE IF NOT EXISTS symbol_history (
   PRIMARY KEY ((symbol, year), month, day)
 ) with CLUSTERING ORDER BY (month desc, day desc);
 ``` 
-###Insert some records
+###Insert Some Records
 ``` 
 INSERT INTO symbol_history (symbol, year, month, day, volume, close, open, low, high, idx, dummy) 
 VALUES ('CORP', 2015, 12, 31, 1054342, 9.33, 9.55, 9.21, 9.57, 'NYSE','CORP_2015') USING TTL 604800;
@@ -205,18 +208,18 @@ Then back in a cqlsh session we will set a column value to null and delete an en
 ```
 cqlsh node2
 ```
-###Set column value to null
+###Set Column Value To Null
 ``` 
 USE ticker;
 UPDATE symbol_history SET high = null WHERE symbol = 'CORP' and year = 2016 and month = 1 and day = 1;
 ``` 
 
-###Delete an entire row
+###Delete An Entire Row
  
 ```
 DELETE FROM symbol_history WHERE symbol = 'CORP' and year = 2016 and month = 1 and day = 5;
 ```
-We proceed to flush again to generate a new SSTable, and then perform a major compaction yielding a single SSTable.
+Flush again to generate a new SSTable, and then run a major compaction to create a single SSTable.
 
 nodetool -p 7299 flush
 nodetool -p 7299 compact ticker
