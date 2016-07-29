@@ -25,7 +25,10 @@ That's:
 - dse-node2 is on 127.0.0.3 JMX=7399 cluster
 - dse-node3 is on 127.0.0.4 JMX=7499 single
 
-Install OpsCenter:
+This document will describe how to set up datastax-agent for the two noes that form the cluster.
+
+##Install OpsCenter
+
 ```
 sudo apt-get install opscenter
 ```
