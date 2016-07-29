@@ -102,7 +102,8 @@ You should get output like this:
 ```  
 After a few seconds you should see your agent on the cluster you defined earlier.  
   
-```http://192.168.56.10:8888/opscenter/index.html
+```
+http://192.168.56.10:8888/opscenter/index.html
 ```
   
   
@@ -116,13 +117,14 @@ cd /usr/share/datastax-agent/dse-node2
 Download and unpack the Agent Install File
 ```
 curl --user simon.ambridge@datastax.com:Yzf600rr1 -L http://downloads.datastax.com/enterprise/datastax-agent-6.0.tar.gz | tar xz
-
+```
+All there?
+```
 ls /usr/share/datastax-agent/dse-node2
 datastax-agent-6.0.1
 
 cd /usr/share/datastax-agent/dse-node2/datastax-agent-6.0.1
 ```
-
 Edit the address.yaml file for node2 - the stomp interface points to the node with OpsCenter:
 ```
 vi ./conf/address.yaml
