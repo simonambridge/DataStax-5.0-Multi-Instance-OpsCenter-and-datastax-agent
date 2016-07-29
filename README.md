@@ -1,22 +1,36 @@
-# DataStax-5.0-Multi-Instance-OpsCenter-and-datastax-agent
+#DataStax-5.0-Multi-Instance-OpsCenter-and-datastax-agent
 
+The new Multi-Instance feature released with DSE 5.0 allows for the simple deployment of multiple DSE instances on a single machine.
+
+For the first part in this series on Multi-Instance look *here*.
+
+DataStax Multi-Instance documentation can be found here: https://docs.datastax.com/en/latest-dse/datastax_enterprise/multiInstance/configMultiInstance.html
+
+##Install DataSTax OpsCenter
+
+```
 deb http://datastaxrepo_gmail.com:utJVKEg4lKeaWTX@debian.datastax.com/enterprise stable main
-
 curl -L https://debian.datastax.com/debian/repo_key | sudo apt-key add -
-
 sudo apt-get update
+```
 
-install opscenter and agents
-
+Let's check the nodes we have installed from the previous lesson:
+```
 sudo dse list-nodes
 dse  dse-node1	dse-node2  dse-node3
 
+```
+That's:
 - dse-node1 is on 127.0.0.2 JMX=7299 cluster
 - dse-node2 is on 127.0.0.3 JMX=7399 cluster
 - dse-node3 is on 127.0.0.4 JMX=7499 single
 
-
+Install OpsCenter:
+```
 sudo apt-get install opscenter
+```
+You should get some output like this:
+```
 ....
 writing new private key to '/var/lib/opscenter/ssl/opscenter.key'
 -----
@@ -25,27 +39,27 @@ Certificate was added to keystore
 Warning: Overwriting existing alias agent_key in destination keystore
 [Storing /var/lib/opscenter/ssl/agentKeyStore.p12]
 MAC verified OK
-
+```
+Now start OpsCenter:
+```
 sudo service opscenterd start
-
+```
+Check its working correctly:
+```
 sudo tail -100 /var/log/opscenter/startup.log
 sudo tail -100 /var/log/opscenter/opscenterd.log
-
-
+```
+Check the web service is working:
+```
 http://192.168.56.10:8888/opscenter/index.html
+```
 
-manage existing cluster
+You'll be prompted to manage an existing cluster:
 
-specify 127.0.0.2, 7299
+You can set up nodes at 127.0.0.2/7299 and 127.0.0.3/7399 but we havent installed the agents yet so....
 
-ssh/sudo credentials vagrant/vagrant .... fails to configure or start agents
+##Tarball agent install - dse-node1
 
-So....
-
-
-
-Tarball agent install - dse-node1
----------------------------------
 
 
 
