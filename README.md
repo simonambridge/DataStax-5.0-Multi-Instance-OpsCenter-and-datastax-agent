@@ -1,4 +1,4 @@
-#DataStax-5.0-Multi-Instance-OpsCenter-and-datastax-agent
+#DataStax 5.0 Multi Instance OpsCenter And datastax-agent
 
 The new Multi-Instance feature released with DSE 5.0 allows for the simple deployment of multiple DSE instances on a single machine.
 
@@ -21,6 +21,7 @@ dse  dse-node1	dse-node2  dse-node3
 
 ```
 That's:
+- (the default stand-aloneDSEe instance - we ignore that)
 - dse-node1 is on 127.0.0.2 JMX=7299 cluster
 - dse-node2 is on 127.0.0.3 JMX=7399 cluster
 - dse-node3 is on 127.0.0.4 JMX=7499 single
@@ -29,12 +30,12 @@ This document will describe how to set up datastax-agent for the two noes that f
 
 ##Install OpsCenter
 
+Use apt-get:
 ```
 sudo apt-get install opscenter
 ```
 You should get some output like this:
 ```
-....
 writing new private key to '/var/lib/opscenter/ssl/opscenter.key'
 -----
 MAC verified OK
